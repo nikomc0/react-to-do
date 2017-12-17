@@ -34,12 +34,17 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+  deleteTodo(index) {
+    const todos = this.state.todos.filter(todo => todo.description !== this.state.todos[index].description);
+    this.setState({ todos: todos });
+  }
+
   render() {
     return (
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo= { () => this.deleteTodo(index) }/>
           )}
         </ul>
          <form onSubmit={ (e) => this.handleSubmit(e) } >
